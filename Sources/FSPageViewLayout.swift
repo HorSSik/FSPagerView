@@ -171,7 +171,18 @@ class FSPagerViewLayout: UICollectionViewLayout {
                 case -CGFloat.greatestFiniteMagnitude ... -0.3:
                     targetOffset = floor(collectionView.contentOffset.x/self.itemSpacing-CGFloat(extraDistance)) * self.itemSpacing
                 default:
-                    targetOffset = round(proposedOffset/self.itemSpacing) * self.itemSpacing
+                    let roundedValue: CGFloat
+                    
+                    switch velocity.y {
+                    case 0.3 ... CGFloat.greatestFiniteMagnitude:
+                        roundedValue = (proposedOffset/self.itemSpacing).rounded(.up)
+                    case -CGFloat.greatestFiniteMagnitude ... -0.3:
+                        roundedValue = (proposedOffset/self.itemSpacing).rounded(.down)
+                    default:
+                        roundedValue = round(proposedOffset/self.itemSpacing)
+                    }
+                    
+                    targetOffset = roundedValue * self.itemSpacing
                 }
             }
             targetOffset = max(0, targetOffset)
