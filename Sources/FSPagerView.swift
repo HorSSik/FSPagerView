@@ -514,6 +514,11 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         self.collectionView.reloadData()
     }
     
+    open func reloadLayout() {
+        self.collectionViewLayout.needsReprepare = true
+        self.collectionViewLayout.prepare()
+    }
+    
     /// Selects the item at the specified index and optionally scrolls it into view.
     ///
     /// - Parameters:
