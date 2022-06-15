@@ -218,12 +218,12 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     
     // MARK: - Private properties
     
-    public weak var collectionViewLayout: FSPagerViewLayout!
-    public weak var collectionView: FSPagerCollectionView!
-    public weak var contentView: UIView!
-    public var timer: Timer?
-    public var numberOfItems: Int = 0
-    public var numberOfSections: Int = 0
+    internal weak var collectionViewLayout: FSPagerViewLayout!
+    internal weak var collectionView: FSPagerCollectionView!
+    internal weak var contentView: UIView!
+    internal var timer: Timer?
+    internal var numberOfItems: Int = 0
+    internal var numberOfSections: Int = 0
     
     fileprivate var dequeingSection = 0
     fileprivate var centermostIndexPath: IndexPath {
@@ -437,6 +437,39 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     }
     
     // MARK: - Public functions
+    
+    /// Animates multiple insert, delete, reload, and move operations as a group.
+    ///
+    /// - Parameters:
+    ///   - updates: The block that performs the relevant insert, delete, reload, or move operations.
+    ///   - completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value `true` if all of the related animations completed successfully or `false` if they were interrupted. This parameter may be `nil`.
+    open func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        self.collectionView.performBatchUpdates(updates, completion: completion)
+    }
+    
+    /// Reloads just the items at the specified index paths.
+    ///
+    /// - Parameters:
+    ///   - indexPaths: An array of `IndexPath` objects identifying the items you want to update.
+    open func reloadItems(at indexPaths: [IndexPath]) {
+        self.collectionView.reloadItems(at: indexPaths)
+    }
+    
+    /// Inserts new items at the specified index paths.
+    ///
+    /// - Parameters:
+    ///   - indexPaths: An array of `IndexPath` objects, each of which contains a section index and item index at which to insert a new cell. This parameter must not be `nil`.
+    open func insertItems(at indexPaths: [IndexPath]) {
+        self.collectionView.insertItems(at: indexPaths)
+    }
+    
+    /// Deletes the items at the specified index paths.
+    ///
+    /// - Parameters:
+    ///   - indexPaths: An array of `IndexPath` objects, each of which contains a section index and item index for the item you want to delete from the collection view. This parameter must not be `nil`.
+    open func deleteItems(at indexPaths: [IndexPath]) {
+        self.collectionView.deleteItems(at: indexPaths)
+    }
     
     /// Register a class for use in creating new pager view cells.
     ///
