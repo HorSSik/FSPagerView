@@ -218,12 +218,12 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
     
     // MARK: - Private properties
     
-    internal weak var collectionViewLayout: FSPagerViewLayout!
-    internal weak var collectionView: FSPagerCollectionView!
-    internal weak var contentView: UIView!
-    internal var timer: Timer?
-    internal var numberOfItems: Int = 0
-    internal var numberOfSections: Int = 0
+    public weak var collectionViewLayout: FSPagerViewLayout!
+    public weak var collectionView: FSPagerCollectionView!
+    public weak var contentView: UIView!
+    public var timer: Timer?
+    public var numberOfItems: Int = 0
+    public var numberOfSections: Int = 0
     
     fileprivate var dequeingSection = 0
     fileprivate var centermostIndexPath: IndexPath {
