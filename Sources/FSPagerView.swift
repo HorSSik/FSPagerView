@@ -208,6 +208,10 @@ open class FSPagerView: UIView,UICollectionViewDataSource,UICollectionViewDelega
         return fmod(CGFloat(scrollOffset), CGFloat(self.numberOfItems))
     }
     
+    public var contentSize: CGSize? {
+        return self.collectionView?.contentSize
+    }
+    
     /// The underlying gesture recognizer for pan gestures.
     @objc
     open var panGestureRecognizer: UIPanGestureRecognizer {
